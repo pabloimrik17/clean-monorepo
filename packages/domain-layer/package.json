@@ -1,5 +1,5 @@
 {
-  "name": "@repo/data-layer",
+  "name": "@repo/domain-layer",
   "type": "module",
   "scripts": {
     "dev": "tsc --watch",
@@ -12,7 +12,6 @@
     }
   },
   "devDependencies": {
-    "@repo/domain-layer": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "typescript": "latest"
   },

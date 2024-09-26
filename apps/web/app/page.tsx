@@ -1,9 +1,15 @@
-import { Add, dataContainer, dataTypes } from "@repo/data-layer";
+import { dataContainer, dataTypes } from "@repo/data-layer";
+import { HttpClient } from "@repo/domain-layer";
 import { Button } from "@repo/ui/button";
 import Image from "next/image";
+import "reflect-metadata";
 import styles from "./page.module.css";
 
 export default function Home() {
+    dataContainer
+        .get<HttpClient>(dataTypes.HttpClient)
+        .get("http://vercel.com");
+
     return (
         <div className={styles.page}>
             <main className={styles.main}>
@@ -19,10 +25,7 @@ export default function Home() {
                     <li>
                         Get started by editing <code>app/page.tsx</code>
                     </li>
-                    <li>
-                        Save and see your changes instantly.{" "}
-                        {dataContainer.get<Add>(dataTypes.Add)(14, 2)}
-                    </li>
+                    <li>Save and see your changes instantly. </li>
                 </ol>
 
                 <div className={styles.ctas}>
