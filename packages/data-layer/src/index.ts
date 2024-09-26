@@ -1,3 +1,3 @@
-export { dataContainer, dataTypes } from "./container.js";
+import "reflect-metadata";
 
-export type { Add } from "./add.js";
+export { dataContainer, dataTypes } from "./container.js";
