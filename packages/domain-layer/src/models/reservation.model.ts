@@ -37,7 +37,7 @@ export class Reservation {
         return this.props.state;
     }
 
-    constructor(private readonly props: ReservationProps) {}
+    constructor(private readonly props: Readonly<ReservationProps>) {}
 
     cancel(): Reservation {
         if (this.state === "canceled") {

@@ -58,7 +58,7 @@ export class Event {
         return this.props.state;
     }
 
-    constructor(private readonly props: EventProps) {}
+    constructor(private readonly props: Readonly<EventProps>) {}
 
     decreaseCapacity(amount: number = 1): Event {
         if (this.availableCapacity - amount < 0) {
