@@ -20,4 +20,5 @@ domainContainer.bind("ReservationCreateUseCase").to(ReservationCreateUseCase);
 domainContainer.bind("ReservationEditUseCase").to(ReservationEditUseCase);
 
 domainContainer.bind("UserCreateUseCase").toConstantValue(null);
+
 domainContainer.bind("UserGetReservationsUseCase").toConstantValue(null);
