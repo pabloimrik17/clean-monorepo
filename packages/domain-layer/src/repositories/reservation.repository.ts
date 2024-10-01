@@ -4,5 +4,5 @@ export interface ReservationRepository {
     save: (reservation: Reservation) => Promise<void>;
     update: (reservation: Reservation) => Promise<void>;
     getById: (id: string) => Promise<Reservation>;
-    listByUser: (userId: string) => Promise<Reservation>;
+    listByUser: (userId: string) => Promise<Reservation[]>;
 }
