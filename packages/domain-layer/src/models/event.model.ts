@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 
-type EventStateEnum = "active" | "cancelled" | "finished";
+export type EventStateEnum = "active" | "cancelled" | "finished";
 
 export class InsufficientCapacityException extends Error {
     constructor() {

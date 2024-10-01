@@ -3,6 +3,7 @@ import "reflect-metadata";
 // Models
 export * from "./models/event.model.js";
 export * from "./models/reservation.model.js";
+export * from "./models/user.model.js";
 
 // Usecases
 export * from "./usecases/event-get-by-id.usecase.js";

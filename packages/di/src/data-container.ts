@@ -1,4 +1,4 @@
-import { ConsoleLogHttpClient } from "@repo/data-layer";
+import { ConsoleHttpClient } from "@repo/data-layer";
 import { HttpClient } from "@repo/domain-layer";
 import { Container } from "inversify";
 
@@ -15,4 +15,4 @@ dataContainer.bind("ReservationDatasource").toConstantValue(null);
 dataContainer.bind("UserDatasource").toConstantValue(null);
 
 // Infra
-dataContainer.bind<HttpClient>("HttpClient").to(ConsoleLogHttpClient);
+dataContainer.bind<HttpClient>("HttpClient").to(ConsoleHttpClient);

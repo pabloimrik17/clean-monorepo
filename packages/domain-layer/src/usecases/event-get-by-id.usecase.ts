@@ -9,7 +9,7 @@ export class EventGetByIdUseCase {
         private readonly eventRepository: EventRepository,
     ) {}
 
-    async execute(eventId: string): Promise<Event> {
+    async execute(eventId: string): Promise<null | Event> {
         const event = await this.eventRepository.getById(eventId);
         if (!event.isActive()) {
             throw new EventNotActiveException();
