@@ -112,19 +112,19 @@ export class NotARealHttpClient implements HttpClient {
             ) as Promise<null | R>;
         }
 
-        if (url.includes("/reservation/")) {
+        if (url.includes("/reservation/user/")) {
+            const userUuid = url.split("/")[3];
+            return Promise.resolve(
+                reservations.filter(
+                    (reservation) => reservation.user === userUuid,
+                ),
+            ) as Promise<R>;
+        } else if (url.includes("/reservation/")) {
             const uuid = url.split("/")[2];
             return Promise.resolve(
                 reservations.find((reservation) => reservation.uuid === uuid) ??
                     null,
             ) as Promise<null | R>;
-        } else if (url.includes("/reservation/user/")) {
-            const userUuid = url.split("/")[3];
-            return Promise.resolve(
-                reservations.filter(
-                    (reservation) => reservation.user !== userUuid,
-                ),
-            ) as Promise<R>;
         }
 
         if (url === "/user") {
