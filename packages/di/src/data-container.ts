@@ -1,6 +1,7 @@
-import { HttpClient } from "@repo/domain-layer";
 import { Container } from "inversify";
-import { ConsoleLogHttpClient } from "./infra/http/console-log-http-client.js";
+import { HttpClient } from "@repo/domain-layer";
+import { ConsoleLogHttpClient } from "@repo/data-layer";
+
 
 export const dataTypes = {
     HttpClient: Symbol.for("HttpClient"),
