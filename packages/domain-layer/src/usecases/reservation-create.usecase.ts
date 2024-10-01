@@ -4,13 +4,10 @@ import type { EventRepository } from "../repositories/event.repository.js";
 import { Reservation } from "../models/reservation.model.js";
 import { DateTime } from "luxon";
 import { v4 as uuidv4 } from 'uuid';
+import { EventNotActiveException } from "../models/event.model.js";
 
-class EventNotActiveException extends Error {
-    constructor() {
-        super("The event is not active");
-    }
-}
-export class UnauthorizedAccessException extends Error {}
+
+
 
 @injectable()
 export class ReservationCreateUseCase {
