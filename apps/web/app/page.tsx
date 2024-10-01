@@ -1,9 +1,9 @@
-import { dataContainer, dataTypes } from "@repo/data-layer";
 import { HttpClient } from "@repo/domain-layer";
 import { Button } from "@repo/ui/button";
 import Image from "next/image";
 import "reflect-metadata";
 import styles from "./page.module.css";
+import { dataContainer, dataTypes } from "@repo/di";
 
 export default function Home() {
     dataContainer
