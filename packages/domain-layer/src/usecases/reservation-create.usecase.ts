@@ -27,6 +27,7 @@ export class ReservationCreateUseCase {
         }
 
         const updatedEvent = event.decreaseCapacity();
+        await this.eventRepository.update(updatedEvent);
 
         const newReservation = new Reservation({
             id: uuidv4(),
