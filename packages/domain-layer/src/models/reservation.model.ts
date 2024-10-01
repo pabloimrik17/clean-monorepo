@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 
-type ReservationState = "active" | "canceled";
+export type ReservationState = "active" | "canceled";
 
 export class ReservationAlreadyCancelledException extends Error {
     constructor() {

@@ -1,6 +1,6 @@
 import { User } from "../models/user.model.js";
 
 export interface UserRepository {
-    save(user: User): void;
-    emailExists(email: string): boolean;
+    save(user: User): Promise<void>;
+    emailExists(email: string): Promise<boolean>;
 }

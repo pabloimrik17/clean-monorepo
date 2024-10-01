@@ -1,18 +1,41 @@
-import { ConsoleLogHttpClient } from "@repo/data-layer";
-import { HttpClient } from "@repo/domain-layer";
+import {
+    ConsoleHttpClient,
+    EventImplRepository,
+    EventRemoteDatasource,
+    ReservationImplRepository,
+    ReservationRemoteDatasource,
+    UserImplRepository,
+    UserRemoteDataSource,
+} from "@repo/data-layer";
+
+import {
+    EventDatasource,
+    EventRepository,
+    HttpClient,
+    ReservationDatasource,
+    ReservationRepository,
+    UserDatasource,
+    UserRepository,
+} from "@repo/domain-layer";
 import { Container } from "inversify";
 
 export const dataContainer = new Container();
 
 // Repositories
-dataContainer.bind("EventRepository").toConstantValue(null);
-dataContainer.bind("ReservationRepository").toConstantValue(null);
-dataContainer.bind("UserRepository").toConstantValue(null);
+dataContainer.bind<EventRepository>("EventRepository").to(EventImplRepository);
+dataContainer
+    .bind<ReservationRepository>("ReservationRepository")
+    .to(ReservationImplRepository);
+dataContainer.bind<UserRepository>("UserRepository").to(UserImplRepository);
 
 // Datasources
-dataContainer.bind("EventDatasource").toConstantValue(null);
-dataContainer.bind("ReservationDatasource").toConstantValue(null);
-dataContainer.bind("UserDatasource").toConstantValue(null);
+dataContainer
+    .bind<EventDatasource>("EventDatasource")
+    .to(EventRemoteDatasource);
+dataContainer
+    .bind<ReservationDatasource>("ReservationDatasource")
+    .to(ReservationRemoteDatasource);
+dataContainer.bind<UserDatasource>("UserDatasource").to(UserRemoteDataSource);
 
 // Infra
-dataContainer.bind<HttpClient>("HttpClient").to(ConsoleLogHttpClient);
+dataContainer.bind<HttpClient>("HttpClient").to(ConsoleHttpClient);

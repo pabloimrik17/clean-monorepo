@@ -15,7 +15,7 @@ export class UserCreateUseCase {
         email: string,
         password: string,
     ): Promise<User> {
-        if (this.userRepository.emailExists(email)) {
+        if (await this.userRepository.emailExists(email)) {
             throw new EmailAlreadyRegisteredException();
         }
 
@@ -26,7 +26,7 @@ export class UserCreateUseCase {
             passwordHash: this.hash(password),
         });
 
-        this.userRepository.save(newUser);
+        await this.userRepository.save(newUser);
 
         return newUser;
     }

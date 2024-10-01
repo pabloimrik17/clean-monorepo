@@ -1,12 +1,14 @@
-import { dataContainer } from "@repo/di";
-import { HttpClient } from "@repo/domain-layer";
+import { container } from "@repo/di";
+import { EventListAvailableUseCase } from "@repo/domain-layer";
 import { Button } from "@repo/ui/button";
 import Image from "next/image";
 import "reflect-metadata";
 import styles from "./page.module.css";
 
-export default function Home() {
-    dataContainer.get<HttpClient>("HttpClient").get("http://vercel.com");
+export default async function Home() {
+    await container
+        .get<EventListAvailableUseCase>("EventListAvailableUseCase")
+        .execute();
 
     return (
         <div className={styles.page}>
