@@ -20,7 +20,7 @@ export class UserRemoteDataSource implements UserDatasource {
             email,
         };
 
-        const userDto = await this.httpClient.get<UserDto>("/users", query);
+        const userDto = await this.httpClient.get<UserDto>("/user", query);
 
         return userDto !== null;
     }

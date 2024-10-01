@@ -12,3 +12,4 @@ export * from "./datasources/user-remote.datasource.js";
 
 // Infra
 export * from "./infra/http/console-http-client.js";
+export * from "./infra/http/not-a-real-http-client.js";
