@@ -21,6 +21,12 @@ export class ConsoleHttpClient implements HttpClient {
         return Promise.resolve(null);
     }
 
+    patch<R, B>(url: string, body: B): Promise<null | R> {
+        console.log("PATCH: ", url, body);
+
+        return Promise.resolve(null);
+    }
+
     delete<R>(url: string): Promise<null | R> {
         console.log("DELETE: ", url);
 

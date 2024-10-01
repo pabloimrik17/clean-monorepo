@@ -46,11 +46,11 @@ export class EventRemoteDatasource implements EventDatasource {
 
     private toDomain(eventDto: EventDto): null | Event {
         let state: EventStateEnum | null = null;
-        if (eventDto.currentState === EventStateEnumDto.Active) {
+        if (eventDto.current_state === EventStateEnumDto.Active) {
             state = "active";
-        } else if (eventDto.currentState === EventStateEnumDto.Cancelled) {
+        } else if (eventDto.current_state === EventStateEnumDto.Canceled) {
             state = "cancelled";
-        } else if (eventDto.currentState === EventStateEnumDto.Finished) {
+        } else if (eventDto.current_state === EventStateEnumDto.Finished) {
             state = "finished";
         }
 
@@ -73,7 +73,7 @@ export class EventRemoteDatasource implements EventDatasource {
         if (event.state === "active") {
             currentState = EventStateEnumDto.Active;
         } else if (event.state === "cancelled") {
-            currentState = EventStateEnumDto.Cancelled;
+            currentState = EventStateEnumDto.Canceled;
         } else if (event.state === "finished") {
             currentState = EventStateEnumDto.Finished;
         }
@@ -93,7 +93,7 @@ export class EventRemoteDatasource implements EventDatasource {
                 total: event.totalCapacity,
                 available: event.availableCapacity,
             },
-            currentState,
+            current_state: currentState,
         };
     }
 }

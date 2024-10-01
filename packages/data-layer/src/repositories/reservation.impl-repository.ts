@@ -12,7 +12,7 @@ export class ReservationImplRepository implements ReservationRepository {
         private readonly reservationDatasource: ReservationDatasource,
     ) {}
 
-    getById(id: string): Promise<Reservation> {
+    getById(id: string): Promise<null | Reservation> {
         return this.reservationDatasource.getById(id);
     }
 

@@ -8,11 +8,11 @@ export class UserImplRepository implements UserRepository {
         private readonly reservationDatasource: UserDatasource,
     ) {}
 
-    emailExists(email: string): boolean {
+    emailExists(email: string): Promise<boolean> {
         return this.reservationDatasource.emailExists(email);
     }
 
-    save(user: User): void {
-        this.reservationDatasource.save(user);
+    save(user: User): Promise<void> {
+        return this.reservationDatasource.save(user);
     }
 }

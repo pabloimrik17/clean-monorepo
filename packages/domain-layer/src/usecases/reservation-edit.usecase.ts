@@ -1,4 +1,5 @@
 import { inject, injectable } from "inversify";
+import { NotFoundException } from "../errors/not-found.exception.js";
 import {
     EventNotActiveException,
     ReservationCancelledException,
@@ -24,6 +25,7 @@ export class ReservationEditUseCase {
     ): Promise<void> {
         const reservation =
             await this.reservationRepository.getById(reservationId);
+        if (!reservation) throw new NotFoundException();
         if (reservation.userId !== userId) {
             throw new UnauthorizedAccessException();
         }
@@ -33,10 +35,13 @@ export class ReservationEditUseCase {
         }
 
         const currentEvent = await this.eventRepository.getById(newEventId);
+        if (!currentEvent) throw new UnauthorizedAccessException();
+
         const updatatedCurrentEvent = currentEvent.increaseCapacity();
         await this.eventRepository.update(updatatedCurrentEvent);
 
         const newEvent = await this.eventRepository.getById(newEventId);
+        if (!newEvent) throw new UnauthorizedAccessException();
         if (!newEvent.isActive()) {
             throw new EventNotActiveException();
         }

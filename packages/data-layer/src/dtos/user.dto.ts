@@ -1,39 +1,10 @@
-export class UnauthorizedAccessException extends Error {}
-
-export class EmailAlreadyRegisteredException extends Error {}
-
-interface UserProps {
-    id: string;
+export interface UserDto {
+    uuid: string;
     name: string;
     email: string;
-    passwordHash: string;
+    hashed_password: string;
 }
 
-export class User {
-    get id(): string {
-        return this.props.id;
-    }
-
-    get name(): string {
-        return this.props.name;
-    }
-
-    get email(): string {
-        return this.props.email;
-    }
-
-    get passwordHash(): string {
-        return this.props.passwordHash;
-    }
-
-    constructor(private readonly props: UserProps) {}
-
-    verifyPassword(password: string): boolean {
-        return this.hash(password) === this.passwordHash;
-    }
-
-    private hash(password: string): string {
-        // Simple hash implementation (for example purposes)
-        return password.split("").reverse().join("");
-    }
+export interface GetUserQueryParamsDto {
+    email: string;
 }
