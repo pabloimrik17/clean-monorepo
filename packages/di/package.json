@@ -12,12 +12,12 @@
     }
   },
   "devDependencies": {
-    "@repo/data-layer": "workspace:*",
-    "@repo/domain-layer": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "typescript": "latest"
   },
   "dependencies": {
+    "@repo/data-layer": "workspace:*",
+    "@repo/domain-layer": "workspace:*",
     "inversify": "^6.0.2",
     "reflect-metadata": "^0.2.2"
   }

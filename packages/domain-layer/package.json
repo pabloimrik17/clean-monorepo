@@ -17,6 +17,7 @@
     "typescript": "latest"
   },
   "dependencies": {
+    "@repo/di": "workspace:*",
     "inversify": "^6.0.2",
     "luxon": "^3.5.0",
     "reflect-metadata": "^0.2.2"

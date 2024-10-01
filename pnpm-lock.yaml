@@ -115,6 +115,9 @@ importers:
 
   packages/data-layer:
     dependencies:
+      '@repo/domain-layer':
+        specifier: workspace:*
+        version: link:../domain-layer
       inversify:
         specifier: ^6.0.2
         version: 6.0.2
@@ -122,9 +125,6 @@ importers:
         specifier: ^0.2.2
         version: 0.2.2
     devDependencies:
-      '@repo/domain-layer':
-        specifier: workspace:*
-        version: link:../domain-layer
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
@@ -134,6 +134,12 @@ importers:
 
   packages/di:
     dependencies:
+      '@repo/data-layer':
+        specifier: workspace:*
+        version: link:../data-layer
+      '@repo/domain-layer':
+        specifier: workspace:*
+        version: link:../domain-layer
       inversify:
         specifier: ^6.0.2
         version: 6.0.2
@@ -141,12 +147,6 @@ importers:
         specifier: ^0.2.2
         version: 0.2.2
     devDependencies:
-      '@repo/data-layer':
-        specifier: workspace:*
-        version: link:../data-layer
-      '@repo/domain-layer':
-        specifier: workspace:*
-        version: link:../domain-layer
       '@repo/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config
@@ -156,6 +156,9 @@ importers:
 
   packages/domain-layer:
     dependencies:
+      '@repo/di':
+        specifier: workspace:*
+        version: link:../di
       inversify:
         specifier: ^6.0.2
         version: 6.0.2
