@@ -20,7 +20,7 @@ export class ReservationRemoteDatasource implements ReservationDatasource {
 
     async getById(id: string): Promise<null | Reservation> {
         const maybeReservationDto = await this.httpClient.get<ReservationDto>(
-            `/reservation/one/${id}`,
+            `/reservation/${id}`,
         );
 
         if (!maybeReservationDto) {

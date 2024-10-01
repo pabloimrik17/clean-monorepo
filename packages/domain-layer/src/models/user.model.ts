@@ -1,6 +1,14 @@
-export class UnauthorizedAccessException extends Error {}
+export class UnauthorizedAccessException extends Error {
+    constructor() {
+        super("Unauthorized access");
+    }
+}
 
-export class EmailAlreadyRegisteredException extends Error {}
+export class EmailAlreadyRegisteredException extends Error {
+    constructor() {
+        super("The email is already registered");
+    }
+}
 
 interface UserProps {
     id: string;

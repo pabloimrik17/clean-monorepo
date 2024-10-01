@@ -20,7 +20,11 @@ export class EventNotActiveException extends Error {
     }
 }
 
-export class ReservationCancelledException extends Error {}
+export class ReservationCancelledException extends Error {
+    constructor() {
+        super("Reservation is cancelled");
+    }
+}
 
 interface EventProps {
     id: string;

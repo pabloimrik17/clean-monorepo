@@ -1,14 +1,16 @@
 import { container } from "@repo/di";
-import { EventListAvailableUseCase } from "@repo/domain-layer";
+import { EventGetByIdUseCase } from "@repo/domain-layer";
 import { Button } from "@repo/ui/button";
 import Image from "next/image";
 import "reflect-metadata";
 import styles from "./page.module.css";
 
 export default async function Home() {
-    await container
-        .get<EventListAvailableUseCase>("EventListAvailableUseCase")
-        .execute();
+    const data = await container
+        .get<EventGetByIdUseCase>("EventGetByIdUseCase")
+        .execute("event-001");
+
+    console.log("data from use case --> ", data);
 
     return (
         <div className={styles.page}>
