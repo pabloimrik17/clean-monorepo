@@ -1,3 +1,7 @@
+export class UnauthorizedAccessException extends Error {}
+
+export class EmailAlreadyRegisteredException extends Error {}
+
 interface UserProps {
     id: string;
     name: string;
@@ -5,7 +9,7 @@ interface UserProps {
     passwordHash: string;
 }
 
-class User {
+export class User {
     get id(): string {
         return this.props.id;
     }

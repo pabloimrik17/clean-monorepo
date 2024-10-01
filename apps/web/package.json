@@ -9,7 +9,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@repo/data-layer": "workspace:*",
     "@repo/di": "workspace:*",
     "@repo/domain-layer": "workspace:*",
     "@repo/ui": "workspace:*",

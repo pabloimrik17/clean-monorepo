@@ -1,14 +1,12 @@
+import { dataContainer } from "@repo/di";
 import { HttpClient } from "@repo/domain-layer";
 import { Button } from "@repo/ui/button";
 import Image from "next/image";
 import "reflect-metadata";
 import styles from "./page.module.css";
-import { dataContainer, dataTypes } from "@repo/di";
 
 export default function Home() {
-    dataContainer
-        .get<HttpClient>(dataTypes.HttpClient)
-        .get("http://vercel.com");
+    dataContainer.get<HttpClient>("HttpClient").get("http://vercel.com");
 
     return (
         <div className={styles.page}>
