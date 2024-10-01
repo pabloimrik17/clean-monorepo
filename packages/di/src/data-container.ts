@@ -1,7 +1,7 @@
 import {
-    ConsoleHttpClient,
     EventImplRepository,
     EventRemoteDatasource,
+    NotARealHttpClient,
     ReservationImplRepository,
     ReservationRemoteDatasource,
     UserImplRepository,
@@ -37,4 +37,4 @@ dataContainer
 dataContainer.bind<UserDatasource>("UserDatasource").to(UserRemoteDataSource);
 
 // Infra
-dataContainer.bind<HttpClient>("HttpClient").to(ConsoleHttpClient);
+dataContainer.bind<HttpClient>("HttpClient").to(NotARealHttpClient);
