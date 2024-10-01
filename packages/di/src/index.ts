@@ -1,4 +1,4 @@
 import "reflect-metadata";
 
-export { dataContainer, dataTypes } from "./data-container.js";
-export { domainContainer, domainTypes } from "./domain-container.js";
+export { dataContainer } from "./data-container.js";
+export { domainContainer } from "./domain-container.js";
