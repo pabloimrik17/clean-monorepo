@@ -16,6 +16,7 @@
     "@repo/di": "workspace:*",
     "@repo/domain-layer": "workspace:*",
     "chalk": "^5.3.0",
+    "cli-table3": "^0.6.5",
     "figlet": "^1.7.0",
     "inquirer": "^11.1.0",
     "inversify": "^6.0.2",

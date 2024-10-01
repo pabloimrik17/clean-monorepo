@@ -9,6 +9,7 @@ import {
     UserGetReservationsUseCase,
 } from "@repo/domain-layer";
 import chalk from "chalk";
+import Table from "cli-table3"; // Para mostrar tablas
 import figlet from "figlet";
 import inquirer from "inquirer";
 import ora from "ora";
@@ -57,6 +58,32 @@ const withLoading = async (fn: () => Promise<void>, message: string) => {
     } catch (error: any) {
         spinner.fail(chalk.red("Error: " + error.message));
     }
+};
+
+// Función para imprimir separadores y secciones visuales
+const printSeparator = () => {
+    console.log(chalk.hex(primaryColor)("=".repeat(60)));
+};
+
+const printSectionTitle = (title: string) => {
+    printSeparator();
+    console.log(chalk.hex(primaryColor)(`== ${title.toUpperCase()} ==`));
+    printSeparator();
+};
+
+// Función para mostrar tabla
+const printEventsTable = (events: any[]) => {
+    const table = new Table({
+        head: ["ID", "Nombre", "Descripción"],
+        colWidths: [15, 30, 50],
+        style: { head: [primaryColor], border: ["grey"] },
+    });
+
+    events.forEach((event) => {
+        table.push([event.id, event.name, event.description]);
+    });
+
+    console.log(table.toString());
 };
 
 // Función para mostrar el menú principal
@@ -141,11 +168,8 @@ const listAvailableEvents = async () => {
                 "EventListAvailableUseCase",
             );
         const events = await eventListAvailableUseCase.execute();
-        events.forEach((event) => {
-            console.log(
-                chalk.green(`Evento: ${event.name} - ${event.description}`),
-            );
-        });
+        printSectionTitle("Eventos Disponibles");
+        printEventsTable(events);
     }, "Listando eventos disponibles...");
 };
 
@@ -264,13 +288,19 @@ const getUserReservations = async () => {
                 "UserGetReservationsUseCase",
             );
         const reservations = await userGetReservationsUseCase.execute(userId);
-        reservations.forEach((reservation) => {
-            console.log(
-                chalk.green(
-                    `Reserva: ${reservation.id}, Estado: ${reservation.state}`,
-                ),
-            );
+        printSectionTitle("Reservas del Usuario");
+
+        const table = new Table({
+            head: ["ID Reserva", "Estado"],
+            colWidths: [15, 20],
+            style: { head: [primaryColor], border: ["grey"] },
         });
+
+        reservations.forEach((reservation) => {
+            table.push([reservation.id, reservation.state]);
+        });
+
+        console.log(table.toString());
     }, "Obteniendo reservas del usuario...");
 };
 
