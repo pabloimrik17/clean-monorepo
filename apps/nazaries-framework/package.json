@@ -1,0 +1,27 @@
+{
+  "name": "nazaries-framework",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/figlet": "^1.5.8",
+    "@types/uuid": "^10.0.0",
+    "typescript": "latest"
+  },
+  "dependencies": {
+    "@repo/di": "workspace:*",
+    "@repo/domain-layer": "workspace:*",
+    "chalk": "^5.3.0",
+    "cli-table3": "^0.6.5",
+    "figlet": "^1.7.0",
+    "inquirer": "^11.1.0",
+    "inversify": "^6.0.2",
+    "ora": "^8.1.0",
+    "reflect-metadata": "^0.2.2",
+    "uuid": "^10.0.0"
+  }
+}
