@@ -1,0 +1,22 @@
+{
+  "name": "nazaries-framework",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "@types/uuid": "^10.0.0",
+    "typescript": "latest"
+  },
+  "dependencies": {
+    "@repo/di": "workspace:*",
+    "@repo/domain-layer": "workspace:*",
+    "inquirer": "^11.1.0",
+    "inversify": "^6.0.2",
+    "reflect-metadata": "^0.2.2",
+    "uuid": "^10.0.0"
+  }
+}
