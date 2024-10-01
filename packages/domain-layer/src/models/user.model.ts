@@ -1,3 +1,6 @@
+
+export class UnauthorizedAccessException extends Error {}
+
 interface UserProps {
     id: string;
     name: string;

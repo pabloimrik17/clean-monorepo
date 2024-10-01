@@ -14,6 +14,14 @@ export class CapacityExceededException extends Error {
     }
 }
 
+export class EventNotActiveException extends Error {
+    constructor() {
+        super("The event is not active");
+    }
+}
+
+export class ReservationCancelledException extends Error {}
+
 interface EventProps {
     id: string;
     name: string;

@@ -4,9 +4,18 @@ import { ConsoleLogHttpClient } from "@repo/data-layer";
 
 
 export const dataTypes = {
-    HttpClient: Symbol.for("HttpClient"),
+    infra: {
+        HttpClient: Symbol.for("HttpClient")
+    },
+    repositories: {
+        EventRepository: Symbol.for("EventRepository"),
+        ReservationRepository: Symbol.for("ReservationRepository")
+    }
 };
 
 export const dataContainer = new Container();
 
-dataContainer.bind<HttpClient>(dataTypes.HttpClient).to(ConsoleLogHttpClient);
+dataContainer.bind<HttpClient>(dataTypes.infra.HttpClient).to(ConsoleLogHttpClient);
+dataContainer.bind(dataTypes.repositories.EventRepository).toConstantValue(null);
+dataContainer.bind(dataTypes.repositories.ReservationRepository).toConstantValue(null);
+
