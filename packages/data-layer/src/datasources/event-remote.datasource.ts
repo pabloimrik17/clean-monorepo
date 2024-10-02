@@ -15,17 +15,6 @@ export class EventRemoteDatasource implements EventDatasource {
         private readonly httpClient: HttpClient,
     ) {}
 
-    async getById(id: string): Promise<null | Event> {
-        const maybeEventDto = await this.httpClient.get<EventDto>(
-            `/events/${id}`,
-        );
-        if (!maybeEventDto) {
-            return null;
-        }
-
-        return this.toDomain(maybeEventDto);
-    }
-
     async listActiveEvents(): Promise<Event[]> {
         const maybeEventDtos =
             await this.httpClient.get<EventDto[]>("/events/active");

@@ -18,18 +18,6 @@ export class ReservationRemoteDatasource implements ReservationDatasource {
         private readonly httpClient: HttpClient,
     ) {}
 
-    async getById(id: string): Promise<null | Reservation> {
-        const maybeReservationDto = await this.httpClient.get<ReservationDto>(
-            `/reservation/${id}`,
-        );
-
-        if (!maybeReservationDto) {
-            return null;
-        }
-
-        return this.toDomain(maybeReservationDto);
-    }
-
     async listByUser(userId: string): Promise<Reservation[]> {
         const maybeReservationsDto = await this.httpClient.get<
             ReservationDto[]
@@ -42,15 +30,6 @@ export class ReservationRemoteDatasource implements ReservationDatasource {
     }
 
     async save(reservation: Reservation): Promise<void> {
-        const body: ReservationDto = this.toDto(reservation);
-
-        await this.httpClient.put<void, ReservationDto>(
-            `/reservation/${reservation.id}`,
-            body,
-        );
-    }
-
-    async update(reservation: Reservation): Promise<void> {
         const body: ReservationDto = this.toDto(reservation);
 
         await this.httpClient.put<void, ReservationDto>(
