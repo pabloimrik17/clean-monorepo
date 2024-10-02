@@ -37,8 +37,8 @@ export class ReservationEditUseCase {
         const currentEvent = await this.eventRepository.getById(newEventId);
         if (!currentEvent) throw new UnauthorizedAccessException();
 
-        const updatatedCurrentEvent = currentEvent.increaseCapacity();
-        await this.eventRepository.update(updatatedCurrentEvent);
+        const updatedCurrentEvent = currentEvent.increaseCapacity();
+        await this.eventRepository.update(updatedCurrentEvent);
 
         const newEvent = await this.eventRepository.getById(newEventId);
         if (!newEvent) throw new UnauthorizedAccessException();
