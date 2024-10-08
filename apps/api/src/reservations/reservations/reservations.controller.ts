@@ -1,7 +1,7 @@
 import { Body, Controller, Param, Post, Put } from "@nestjs/common";
 import {
-    ReservationCreateFrontendDto,
-    ReservationUpdateFrontendDto,
+    ReservationCreateBackendDto,
+    ReservationUpdateBackendDto,
 } from "@repo/data-layer";
 import {
     ReservationCancelUseCase,
@@ -27,7 +27,7 @@ export class ReservationsController {
 
     @Post()
     async create(
-        @Body() createReservationDto: ReservationCreateFrontendDto,
+        @Body() createReservationDto: ReservationCreateBackendDto,
     ): Promise<void> {
         await this.reservationCreateUseCase.execute(
             createReservationDto.user,
@@ -38,7 +38,7 @@ export class ReservationsController {
     @Put(":reservationId")
     async edit(
         @Param("reservationId") reservationId: string,
-        @Body() editReservationDto: ReservationUpdateFrontendDto,
+        @Body() editReservationDto: ReservationUpdateBackendDto,
     ): Promise<void> {
         await this.reservationEditUseCase.execute(
             reservationId,
