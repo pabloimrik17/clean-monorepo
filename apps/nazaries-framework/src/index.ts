@@ -1,4 +1,4 @@
-import { container } from "@repo/di";
+import { frontendContainer } from "@repo/di";
 import {
     EventGetByIdUseCase,
     EventListAvailableUseCase,
@@ -149,7 +149,7 @@ const getEventById = async () => {
     });
 
     await withLoading(async () => {
-        const eventGetByIdUseCase = container.get<EventGetByIdUseCase>(
+        const eventGetByIdUseCase = frontendContainer.get<EventGetByIdUseCase>(
             "EventGetByIdUseCase",
         );
         const event = await eventGetByIdUseCase.execute(eventId);
@@ -164,7 +164,7 @@ const getEventById = async () => {
 const listAvailableEvents = async () => {
     await withLoading(async () => {
         const eventListAvailableUseCase =
-            container.get<EventListAvailableUseCase>(
+            frontendContainer.get<EventListAvailableUseCase>(
                 "EventListAvailableUseCase",
             );
         const events = await eventListAvailableUseCase.execute();
@@ -189,7 +189,9 @@ const cancelReservation = async () => {
 
     await withLoading(async () => {
         const reservationCancelUseCase =
-            container.get<ReservationCancelUseCase>("ReservationCancelUseCase");
+            frontendContainer.get<ReservationCancelUseCase>(
+                "ReservationCancelUseCase",
+            );
         await reservationCancelUseCase.execute(reservationId, userId);
         console.log(chalk.green("Reserva cancelada con éxito."));
     }, "Cancelando reserva...");
@@ -211,7 +213,9 @@ const createReservation = async () => {
 
     await withLoading(async () => {
         const reservationCreateUseCase =
-            container.get<ReservationCreateUseCase>("ReservationCreateUseCase");
+            frontendContainer.get<ReservationCreateUseCase>(
+                "ReservationCreateUseCase",
+            );
         const reservation = await reservationCreateUseCase.execute(
             userId,
             eventId,
@@ -240,9 +244,10 @@ const editReservation = async () => {
     ]);
 
     await withLoading(async () => {
-        const reservationEditUseCase = container.get<ReservationEditUseCase>(
-            "ReservationEditUseCase",
-        );
+        const reservationEditUseCase =
+            frontendContainer.get<ReservationEditUseCase>(
+                "ReservationEditUseCase",
+            );
         await reservationEditUseCase.execute(reservationId, userId, newEventId);
         console.log(chalk.green("Reserva editada con éxito."));
     }, "Editando reserva...");
@@ -269,7 +274,7 @@ const createUser = async () => {
 
     await withLoading(async () => {
         const userCreateUseCase =
-            container.get<UserCreateUseCase>("UserCreateUseCase");
+            frontendContainer.get<UserCreateUseCase>("UserCreateUseCase");
         const user = await userCreateUseCase.execute(name, email, password);
         console.log(chalk.green(`Usuario creado: ${user.id}`));
     }, "Creando usuario...");
@@ -284,7 +289,7 @@ const getUserReservations = async () => {
 
     await withLoading(async () => {
         const userGetReservationsUseCase =
-            container.get<UserGetReservationsUseCase>(
+            frontendContainer.get<UserGetReservationsUseCase>(
                 "UserGetReservationsUseCase",
             );
         const reservations = await userGetReservationsUseCase.execute(userId);

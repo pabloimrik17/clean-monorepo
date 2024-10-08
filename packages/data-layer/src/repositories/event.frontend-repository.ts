@@ -6,7 +6,7 @@ import {
 import { inject, injectable } from "inversify";
 
 @injectable()
-export class EventImplRepository implements EventRepository {
+export class EventFrontendRepository implements EventRepository {
     constructor(
         @inject("EventDatasource")
         private readonly eventDatasource: EventDatasource,

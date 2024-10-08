@@ -1,4 +1,4 @@
-import { container } from "@repo/di";
+import { frontendContainer } from "@repo/di";
 import { EventGetByIdUseCase } from "@repo/domain-layer";
 import { Button } from "@repo/ui/button";
 import Image from "next/image";
@@ -6,7 +6,7 @@ import "reflect-metadata";
 import styles from "./page.module.css";
 
 export default async function Home() {
-    const data = await container
+    const data = await frontendContainer
         .get<EventGetByIdUseCase>("EventGetByIdUseCase")
         .execute("event-001");
 

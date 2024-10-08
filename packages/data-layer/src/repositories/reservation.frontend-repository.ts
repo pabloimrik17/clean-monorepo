@@ -6,7 +6,7 @@ import {
 import { inject, injectable } from "inversify";
 
 @injectable()
-export class ReservationImplRepository implements ReservationRepository {
+export class ReservationFrontendRepository implements ReservationRepository {
     constructor(
         @inject("ReservationDatasource")
         private readonly reservationDatasource: ReservationDatasource,

@@ -1,5 +1,13 @@
 import { Container } from "inversify";
-import { dataContainer } from "./data-container.js";
+import { dataFrontendContainer } from "./data-container.js";
 import { domainContainer } from "./domain-container.js";
 
-export const container = Container.merge(domainContainer, dataContainer);
+export const frontendContainer = Container.merge(
+    domainContainer,
+    dataFrontendContainer,
+);
+
+export const backendContainer = Container.merge(
+    domainContainer,
+    dataFrontendContainer,
+);
