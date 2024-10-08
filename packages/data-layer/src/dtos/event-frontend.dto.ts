@@ -1,10 +1,10 @@
-export enum EventApiStateEnumDto {
+export enum EventFrontendStateEnumDto {
     Active = 0,
     Canceled = -1,
     Finished = 1,
 }
 
-export interface EventApiDto {
+export interface EventFrontendDto {
     uuid: string;
     name: string;
     short_description: string;
@@ -14,5 +14,5 @@ export interface EventApiDto {
         total: number;
         available: number;
     };
-    current_state: EventApiStateEnumDto;
+    current_state: EventFrontendStateEnumDto;
 }

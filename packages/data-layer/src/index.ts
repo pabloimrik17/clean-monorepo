@@ -6,9 +6,9 @@ export * from "./repositories/reservation.impl-repository.js";
 export * from "./repositories/user.impl-repository.js";
 
 // Dtos
-export * from "./dtos/event-api.dto.js";
-export * from "./dtos/reservation-api.dto.js";
-export * from "./dtos/user-api.dto.js";
+export * from "./dtos/event-frontend.dto";
+export * from "./dtos/reservation-frontend.dto";
+export * from "./dtos/user-frontend.dto";
 
 // Datasources
 export * from "./datasources/event-remote.datasource.js";

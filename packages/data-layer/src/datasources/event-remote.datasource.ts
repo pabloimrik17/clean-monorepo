@@ -6,7 +6,10 @@ import {
 } from "@repo/domain-layer";
 import { inject, injectable } from "inversify";
 import { DateTime } from "luxon";
-import { EventApiDto, EventApiStateEnumDto } from "../dtos/event-api.dto";
+import {
+    EventFrontendDto,
+    EventFrontendStateEnumDto,
+} from "../dtos/event-frontend.dto";
 
 @injectable()
 export class EventRemoteDatasource implements EventDatasource {
@@ -16,7 +19,7 @@ export class EventRemoteDatasource implements EventDatasource {
     ) {}
 
     async getById(id: string): Promise<null | Event> {
-        const maybeEventDto = await this.httpClient.get<EventApiDto>(
+        const maybeEventDto = await this.httpClient.get<EventFrontendDto>(
             `/events/${id}`,
         );
         if (!maybeEventDto) {
@@ -28,7 +31,7 @@ export class EventRemoteDatasource implements EventDatasource {
 
     async listActiveEvents(): Promise<Event[]> {
         const maybeEventDtos =
-            await this.httpClient.get<EventApiDto[]>("/events/active");
+            await this.httpClient.get<EventFrontendDto[]>("/events/active");
         if (!maybeEventDtos) {
             return [];
         }
@@ -39,21 +42,25 @@ export class EventRemoteDatasource implements EventDatasource {
     }
 
     async update(event: Event): Promise<void> {
-        const body: EventApiDto = this.toDto(event);
+        const body: EventFrontendDto = this.toDto(event);
 
-        await this.httpClient.put<void, EventApiDto>(
+        await this.httpClient.put<void, EventFrontendDto>(
             `/events/${event.id}`,
             body,
         );
     }
 
-    private toDomain(eventDto: EventApiDto): null | Event {
+    private toDomain(eventDto: EventFrontendDto): null | Event {
         let state: EventStateEnum | null = null;
-        if (eventDto.current_state === EventApiStateEnumDto.Active) {
+        if (eventDto.current_state === EventFrontendStateEnumDto.Active) {
             state = "active";
-        } else if (eventDto.current_state === EventApiStateEnumDto.Canceled) {
+        } else if (
+            eventDto.current_state === EventFrontendStateEnumDto.Canceled
+        ) {
             state = "cancelled";
-        } else if (eventDto.current_state === EventApiStateEnumDto.Finished) {
+        } else if (
+            eventDto.current_state === EventFrontendStateEnumDto.Finished
+        ) {
             state = "finished";
         }
 
@@ -71,14 +78,14 @@ export class EventRemoteDatasource implements EventDatasource {
         });
     }
 
-    private toDto(event: Event): EventApiDto {
-        let currentState: EventApiStateEnumDto | null = null;
+    private toDto(event: Event): EventFrontendDto {
+        let currentState: EventFrontendStateEnumDto | null = null;
         if (event.state === "active") {
-            currentState = EventApiStateEnumDto.Active;
+            currentState = EventFrontendStateEnumDto.Active;
         } else if (event.state === "cancelled") {
-            currentState = EventApiStateEnumDto.Canceled;
+            currentState = EventFrontendStateEnumDto.Canceled;
         } else if (event.state === "finished") {
-            currentState = EventApiStateEnumDto.Finished;
+            currentState = EventFrontendStateEnumDto.Finished;
         }
 
         if (!currentState) throw new Error("Invalid event state");
