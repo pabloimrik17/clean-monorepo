@@ -11,10 +11,10 @@
     }
   },
   "devDependencies": {
+    "@nestjs/swagger": "^7.4.2",
     "@repo/typescript-config": "workspace:*",
     "@types/luxon": "^3.4.2",
     "typescript": "latest"
-
   },
   "dependencies": {
     "@repo/domain-layer": "workspace:*",

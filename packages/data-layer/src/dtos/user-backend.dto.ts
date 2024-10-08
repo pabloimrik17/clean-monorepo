@@ -1,14 +1,29 @@
-export interface UserBackendDto {
-    uuid: string;
-    name: string;
-    email: string;
-    hashed_password: string;
+import { ApiProperty } from "@nestjs/swagger/dist/decorators/api-property.decorator";
+
+export class UserBackendDto {
+    @ApiProperty()
+    uuid!: string;
+
+    @ApiProperty()
+    name!: string;
+
+    @ApiProperty()
+    email!: string;
+
+    @ApiProperty()
+    hashed_password!: string;
 }
 
-export type UserCreateBackendDto = Pick<
-    UserBackendDto,
-    "name" | "email" | "hashed_password"
->;
+export class UserCreateBackendDto {
+    @ApiProperty()
+    name!: string;
+
+    @ApiProperty()
+    email!: string;
+
+    @ApiProperty()
+    hashed_password!: string;
+}
 
 export interface UserBackendGetQueryParamsDto {
     email: string;
