@@ -1,9 +1,10 @@
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { z } from "zod";
-import { AppController } from "./app.controller";
-import { AppService } from "./app.service";
 import { DatabaseModule } from "./database/database.module";
+import { EventsModule } from "./events/events.module";
+import { ReservationsModule } from "./reservations/reservations.module";
+import { UsersModule } from "./users/users.module";
 
 @Module({
     imports: [
@@ -30,8 +31,11 @@ import { DatabaseModule } from "./database/database.module";
                 database: configService.get("DATABASE_DB") ?? "",
             }),
         }),
+        UsersModule,
+        EventsModule,
+        ReservationsModule,
     ],
-    controllers: [AppController],
-    providers: [AppService],
+    controllers: [],
+    providers: [],
 })
 export class AppModule {}
