@@ -35,7 +35,7 @@ import { UsersModule } from "./users/users.module";
         EventsModule,
         ReservationsModule,
     ],
-    controllers: [AppController],
-    providers: [AppService],
+    controllers: [],
+    providers: [],
 })
 export class AppModule {}
