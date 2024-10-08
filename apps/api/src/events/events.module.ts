@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { container } from "@repo/di";
+import { backendContainer } from "@repo/di";
 import {
     EventGetByIdUseCase,
     EventListAvailableUseCase,
@@ -11,11 +11,11 @@ import { EventsController } from "./events/events.controller";
     providers: [
         {
             provide: EventListAvailableUseCase,
-            useValue: container.get("EventListAvailableUseCase"),
+            useValue: backendContainer.get("EventListAvailableUseCase"),
         },
         {
             provide: EventGetByIdUseCase,
-            useValue: container.get("EventGetByIdUseCase"),
+            useValue: backendContainer.get("EventGetByIdUseCase"),
         },
     ],
 })

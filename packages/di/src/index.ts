@@ -1,3 +1,3 @@
 import "reflect-metadata";
 
-export { container } from "./container.js";
+export { backendContainer, frontendContainer } from "./container.js";

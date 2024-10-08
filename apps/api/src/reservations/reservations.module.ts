@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { container } from "@repo/di";
+import { backendContainer } from "@repo/di";
 import {
     ReservationCancelUseCase,
     ReservationCreateUseCase,
@@ -12,15 +12,15 @@ import { ReservationsController } from "./reservations/reservations.controller";
     providers: [
         {
             provide: ReservationCancelUseCase,
-            useValue: container.get("ReservationCancelUseCase"),
+            useValue: backendContainer.get("ReservationCancelUseCase"),
         },
         {
             provide: ReservationCreateUseCase,
-            useValue: container.get("ReservationCreateUseCase"),
+            useValue: backendContainer.get("ReservationCreateUseCase"),
         },
         {
             provide: ReservationEditUseCase,
-            useValue: container.get("ReservationEditUseCase"),
+            useValue: backendContainer.get("ReservationEditUseCase"),
         },
     ],
 })

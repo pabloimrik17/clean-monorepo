@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { container } from "@repo/di";
+import { backendContainer } from "@repo/di";
 import {
     UserCreateUseCase,
     UserGetReservationsUseCase,
@@ -11,11 +11,11 @@ import { UsersController } from "./users/users.controller";
     providers: [
         {
             provide: UserCreateUseCase,
-            useValue: container.get("UserCreateUseCase"),
+            useValue: backendContainer.get("UserCreateUseCase"),
         },
         {
             provide: UserGetReservationsUseCase,
-            useValue: container.get("UserGetReservationsUseCase"),
+            useValue: backendContainer.get("UserGetReservationsUseCase"),
         },
     ],
 })

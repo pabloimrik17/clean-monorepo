@@ -1,9 +1,9 @@
 import "reflect-metadata";
 
 // Repositories
-export * from "./repositories/event.impl-repository.js";
-export * from "./repositories/reservation.impl-repository.js";
-export * from "./repositories/user.impl-repository.js";
+export * from "./repositories/event.frontend-repository";
+export * from "./repositories/reservation.frontend-repository";
+export * from "./repositories/user.frontend-repository";
 
 // Dtos
 export * from "./dtos/event-backend.dto";

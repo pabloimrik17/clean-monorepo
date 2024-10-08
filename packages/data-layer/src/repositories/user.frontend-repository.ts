@@ -2,7 +2,7 @@ import { User, type UserDatasource, UserRepository } from "@repo/domain-layer";
 import { inject, injectable } from "inversify";
 
 @injectable()
-export class UserImplRepository implements UserRepository {
+export class UserFrontendRepository implements UserRepository {
     constructor(
         @inject("UserDatasource")
         private readonly reservationDatasource: UserDatasource,
