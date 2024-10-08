@@ -7,9 +7,9 @@ import {
 import { inject, injectable } from "inversify";
 import { DateTime } from "luxon";
 import {
-    ReservationDto,
-    ReservationStateEnumDto,
-} from "../dtos/reservation.dto.js";
+    ReservationFrontendDto,
+    ReservationFrontendStateEnumDto,
+} from "../dtos/reservation-frontend.dto";
 
 @injectable()
 export class ReservationRemoteDatasource implements ReservationDatasource {
@@ -19,9 +19,10 @@ export class ReservationRemoteDatasource implements ReservationDatasource {
     ) {}
 
     async getById(id: string): Promise<null | Reservation> {
-        const maybeReservationDto = await this.httpClient.get<ReservationDto>(
-            `/reservation/${id}`,
-        );
+        const maybeReservationDto =
+            await this.httpClient.get<ReservationFrontendDto>(
+                `/reservation/${id}`,
+            );
 
         if (!maybeReservationDto) {
             return null;
@@ -32,7 +33,7 @@ export class ReservationRemoteDatasource implements ReservationDatasource {
 
     async listByUser(userId: string): Promise<Reservation[]> {
         const maybeReservationsDto = await this.httpClient.get<
-            ReservationDto[]
+            ReservationFrontendDto[]
         >(`/reservation/user/${userId}`);
         if (!maybeReservationsDto) return [];
 
@@ -42,29 +43,35 @@ export class ReservationRemoteDatasource implements ReservationDatasource {
     }
 
     async save(reservation: Reservation): Promise<void> {
-        const body: ReservationDto = this.toDto(reservation);
+        const body: ReservationFrontendDto = this.toDto(reservation);
 
-        await this.httpClient.put<void, ReservationDto>(
+        await this.httpClient.put<void, ReservationFrontendDto>(
             `/reservation/${reservation.id}`,
             body,
         );
     }
 
     async update(reservation: Reservation): Promise<void> {
-        const body: ReservationDto = this.toDto(reservation);
+        const body: ReservationFrontendDto = this.toDto(reservation);
 
-        await this.httpClient.put<void, ReservationDto>(
+        await this.httpClient.put<void, ReservationFrontendDto>(
             `/reservation/${reservation.id}`,
             body,
         );
     }
 
-    private toDomain(reservationDto: ReservationDto): null | Reservation {
+    private toDomain(
+        reservationDto: ReservationFrontendDto,
+    ): null | Reservation {
         let state: ReservationState | null = null;
-        if (reservationDto.current_state === ReservationStateEnumDto.Active) {
+        if (
+            reservationDto.current_state ===
+            ReservationFrontendStateEnumDto.Active
+        ) {
             state = "active";
         } else if (
-            reservationDto.current_state === ReservationStateEnumDto.Canceled
+            reservationDto.current_state ===
+            ReservationFrontendStateEnumDto.Canceled
         ) {
             state = "canceled";
         }
@@ -80,12 +87,12 @@ export class ReservationRemoteDatasource implements ReservationDatasource {
         });
     }
 
-    private toDto(reservation: Reservation): ReservationDto {
-        let currentState: ReservationStateEnumDto | null = null;
+    private toDto(reservation: Reservation): ReservationFrontendDto {
+        let currentState: ReservationFrontendStateEnumDto | null = null;
         if (reservation.state === "active") {
-            currentState = ReservationStateEnumDto.Active;
+            currentState = ReservationFrontendStateEnumDto.Active;
         } else if (reservation.state === "canceled") {
-            currentState = ReservationStateEnumDto.Canceled;
+            currentState = ReservationFrontendStateEnumDto.Canceled;
         }
 
         if (!currentState) throw new Error("Invalid reservation state");

@@ -1,14 +1,20 @@
 import { HttpClient } from "@repo/domain-layer";
 import { injectable } from "inversify";
-import { EventDto, EventStateEnumDto } from "../../dtos/event.dto.js";
 import {
-    ReservationDto,
-    ReservationStateEnumDto,
-} from "../../dtos/reservation.dto.js";
-import { GetUserQueryParamsDto, UserDto } from "../../dtos/user.dto.js";
+    EventFrontendDto,
+    EventFrontendStateEnumDto,
+} from "../../dtos/event-frontend.dto";
+import {
+    ReservationFrontendDto,
+    ReservationFrontendStateEnumDto,
+} from "../../dtos/reservation-frontend.dto";
+import {
+    UserFrontendDto,
+    UserFrontendGetQueryParamsDto,
+} from "../../dtos/user-frontend.dto";
 
 // Eventos
-const events: EventDto[] = [
+const events: EventFrontendDto[] = [
     {
         uuid: "event-001",
         name: "Tech Conference 2024",
@@ -20,7 +26,7 @@ const events: EventDto[] = [
             total: 500,
             available: 200,
         },
-        current_state: EventStateEnumDto.Active,
+        current_state: EventFrontendStateEnumDto.Active,
     },
     {
         uuid: "event-002",
@@ -33,7 +39,7 @@ const events: EventDto[] = [
             total: 200,
             available: 50,
         },
-        current_state: EventStateEnumDto.Finished,
+        current_state: EventFrontendStateEnumDto.Finished,
     },
     {
         uuid: "event-003",
@@ -46,7 +52,7 @@ const events: EventDto[] = [
             total: 300,
             available: 0,
         },
-        current_state: EventStateEnumDto.Canceled,
+        current_state: EventFrontendStateEnumDto.Canceled,
     },
     {
         uuid: "event-004",
@@ -59,7 +65,7 @@ const events: EventDto[] = [
             total: 1000,
             available: 250,
         },
-        current_state: EventStateEnumDto.Active,
+        current_state: EventFrontendStateEnumDto.Active,
     },
     {
         uuid: "event-005",
@@ -72,7 +78,7 @@ const events: EventDto[] = [
             total: 800,
             available: 600,
         },
-        current_state: EventStateEnumDto.Active,
+        current_state: EventFrontendStateEnumDto.Active,
     },
     {
         uuid: "event-006",
@@ -84,7 +90,7 @@ const events: EventDto[] = [
             total: 300,
             available: 100,
         },
-        current_state: EventStateEnumDto.Active,
+        current_state: EventFrontendStateEnumDto.Active,
     },
     {
         uuid: "event-007",
@@ -97,7 +103,7 @@ const events: EventDto[] = [
             total: 400,
             available: 150,
         },
-        current_state: EventStateEnumDto.Active,
+        current_state: EventFrontendStateEnumDto.Active,
     },
     {
         uuid: "event-008",
@@ -109,7 +115,7 @@ const events: EventDto[] = [
             total: 50,
             available: 10,
         },
-        current_state: EventStateEnumDto.Active,
+        current_state: EventFrontendStateEnumDto.Active,
     },
     {
         uuid: "event-009",
@@ -121,7 +127,7 @@ const events: EventDto[] = [
             total: 150,
             available: 0,
         },
-        current_state: EventStateEnumDto.Finished,
+        current_state: EventFrontendStateEnumDto.Finished,
     },
     {
         uuid: "event-010",
@@ -134,12 +140,12 @@ const events: EventDto[] = [
             total: 200,
             available: 80,
         },
-        current_state: EventStateEnumDto.Active,
+        current_state: EventFrontendStateEnumDto.Active,
     },
 ];
 
 // Usuarios
-const users: UserDto[] = [
+const users: UserFrontendDto[] = [
     {
         uuid: "user-001",
         name: "John Doe",
@@ -203,76 +209,76 @@ const users: UserDto[] = [
 ];
 
 // Reservas
-const reservations: ReservationDto[] = [
+const reservations: ReservationFrontendDto[] = [
     {
         uuid: "reservation-001",
         user: "user-001", // John Doe
         event: "event-001", // Tech Conference 2024
         booking_date: "2024-09-25",
-        current_state: ReservationStateEnumDto.Active,
+        current_state: ReservationFrontendStateEnumDto.Active,
     },
     {
         uuid: "reservation-002",
         user: "user-002", // Jane Smith
         event: "event-002", // Startup Meetup
         booking_date: "2024-10-30",
-        current_state: ReservationStateEnumDto.Active,
+        current_state: ReservationFrontendStateEnumDto.Active,
     },
     {
         uuid: "reservation-003",
         user: "user-003", // Alice Johnson
         event: "event-003", // AI Summit 2024 (Cancelled event)
         booking_date: "2024-08-15",
-        current_state: ReservationStateEnumDto.Canceled,
+        current_state: ReservationFrontendStateEnumDto.Canceled,
     },
     {
         uuid: "reservation-004",
         user: "user-004", // Michael Brown
         event: "event-004", // Music Festival 2024
         booking_date: "2024-09-01",
-        current_state: ReservationStateEnumDto.Active,
+        current_state: ReservationFrontendStateEnumDto.Active,
     },
     {
         uuid: "reservation-005",
         user: "user-005", // Emily Davis
         event: "event-005", // Health and Wellness Expo
         booking_date: "2024-09-15",
-        current_state: ReservationStateEnumDto.Active,
+        current_state: ReservationFrontendStateEnumDto.Active,
     },
     {
         uuid: "reservation-006",
         user: "user-006", // Chris Wilson
         event: "event-006", // Art Exhibition: Modern Wonders
         booking_date: "2024-09-18",
-        current_state: ReservationStateEnumDto.Active,
+        current_state: ReservationFrontendStateEnumDto.Active,
     },
     {
         uuid: "reservation-007",
         user: "user-007", // Olivia Garcia
         event: "event-007", // Blockchain Summit 2024
         booking_date: "2024-09-20",
-        current_state: ReservationStateEnumDto.Active,
+        current_state: ReservationFrontendStateEnumDto.Active,
     },
     {
         uuid: "reservation-008",
         user: "user-008", // James Martinez
         event: "event-008", // Cooking Masterclass
         booking_date: "2024-09-22",
-        current_state: ReservationStateEnumDto.Active,
+        current_state: ReservationFrontendStateEnumDto.Active,
     },
     {
         uuid: "reservation-009",
         user: "user-009", // Sophia Rodriguez
         event: "event-009", // Film Screening: Indie Night (Finished event)
         booking_date: "2024-09-25",
-        current_state: ReservationStateEnumDto.Canceled,
+        current_state: ReservationFrontendStateEnumDto.Canceled,
     },
     {
         uuid: "reservation-010",
         user: "user-010", // Liam Hernandez
         event: "event-010", // Outdoor Adventure Retreat
         booking_date: "2024-09-28",
-        current_state: ReservationStateEnumDto.Active,
+        current_state: ReservationFrontendStateEnumDto.Active,
     },
 ];
 
@@ -282,7 +288,9 @@ export class NotARealHttpClient implements HttpClient {
         if (url === "/events/active") {
             return Promise.resolve(
                 events.filter(
-                    (event) => event.current_state === EventStateEnumDto.Active,
+                    (event) =>
+                        event.current_state ===
+                        EventFrontendStateEnumDto.Active,
                 ),
             ) as Promise<R>;
         } else if (url.includes("/events/")) {
@@ -308,7 +316,7 @@ export class NotARealHttpClient implements HttpClient {
         }
 
         if (url === "/user") {
-            const email = (query as GetUserQueryParamsDto).email;
+            const email = (query as UserFrontendGetQueryParamsDto).email;
             const maybeUser = users.find((user) => user.email === email);
             if (!maybeUser) return Promise.resolve(null);
 
@@ -328,7 +336,7 @@ export class NotARealHttpClient implements HttpClient {
             const index = events.findIndex((event) => event.uuid === uuid);
             if (!index) return Promise.resolve(null);
 
-            events[index] = body as EventDto;
+            events[index] = body as EventFrontendDto;
 
             return Promise.resolve(events[index] as unknown as Promise<R>);
         }
@@ -340,7 +348,7 @@ export class NotARealHttpClient implements HttpClient {
             );
             if (!index) return Promise.resolve(null);
 
-            reservations[index] = body as ReservationDto;
+            reservations[index] = body as ReservationFrontendDto;
 
             return Promise.resolve(
                 reservations[index] as unknown as Promise<R>,
@@ -352,7 +360,7 @@ export class NotARealHttpClient implements HttpClient {
             const index = users.findIndex((user) => user.uuid === uuid);
             if (!index) return Promise.resolve(null);
 
-            users[index] = body as UserDto;
+            users[index] = body as UserFrontendDto;
 
             return Promise.resolve(users[index] as unknown as Promise<R>);
         }

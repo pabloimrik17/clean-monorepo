@@ -1,6 +1,9 @@
 import { type HttpClient, User, UserDatasource } from "@repo/domain-layer";
 import { inject, injectable } from "inversify";
-import { GetUserQueryParamsDto, UserDto } from "../dtos/user.dto.js";
+import {
+    UserFrontendDto,
+    UserFrontendGetQueryParamsDto,
+} from "../dtos/user-frontend.dto";
 
 @injectable()
 export class UserRemoteDataSource implements UserDatasource {
@@ -10,22 +13,28 @@ export class UserRemoteDataSource implements UserDatasource {
     ) {}
 
     async save(user: User): Promise<void> {
-        const body: UserDto = this.toDto(user);
+        const body: UserFrontendDto = this.toDto(user);
 
-        await this.httpClient.put<void, UserDto>(`/user/${user.id}`, body);
+        await this.httpClient.put<void, UserFrontendDto>(
+            `/user/${user.id}`,
+            body,
+        );
     }
 
     async emailExists(email: string): Promise<boolean> {
-        const query: GetUserQueryParamsDto = {
+        const query: UserFrontendGetQueryParamsDto = {
             email,
         };
 
-        const userDto = await this.httpClient.get<UserDto>("/user", query);
+        const userDto = await this.httpClient.get<UserFrontendDto>(
+            "/user",
+            query,
+        );
 
         return userDto !== null;
     }
 
-    private toDomain(userDto: UserDto): null | User {
+    private toDomain(userDto: UserFrontendDto): null | User {
         return new User({
             id: userDto.uuid,
             name: userDto.name,
@@ -34,7 +43,7 @@ export class UserRemoteDataSource implements UserDatasource {
         });
     }
 
-    private toDto(user: User): UserDto {
+    private toDto(user: User): UserFrontendDto {
         return {
             uuid: user.id,
             name: user.name,
