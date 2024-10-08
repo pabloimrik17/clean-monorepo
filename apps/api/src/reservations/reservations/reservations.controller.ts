@@ -1,9 +1,12 @@
 import { Body, Controller, Param, Post, Put } from "@nestjs/common";
 import {
+    ReservationBackendDto,
+    ReservationBackendStateEnumDto,
     ReservationCreateBackendDto,
     ReservationUpdateBackendDto,
 } from "@repo/data-layer";
 import {
+    Reservation,
     ReservationCancelUseCase,
     ReservationCreateUseCase,
     ReservationEditUseCase,
@@ -28,11 +31,13 @@ export class ReservationsController {
     @Post()
     async create(
         @Body() createReservationDto: ReservationCreateBackendDto,
-    ): Promise<void> {
-        await this.reservationCreateUseCase.execute(
+    ): Promise<ReservationBackendDto> {
+        const reservation = await this.reservationCreateUseCase.execute(
             createReservationDto.user,
             createReservationDto.event,
         );
+
+        return this.toDto(reservation);
     }
 
     @Put(":reservationId")
@@ -45,5 +50,22 @@ export class ReservationsController {
             editReservationDto.user,
             editReservationDto.event,
         );
+    }
+
+    private toDto(reservation: Reservation): ReservationBackendDto {
+        let state: ReservationBackendStateEnumDto;
+        if (reservation.state === "active") {
+            state = ReservationBackendStateEnumDto.Active;
+        } else {
+            state = ReservationBackendStateEnumDto.Canceled;
+        }
+
+        return {
+            uuid: reservation.id,
+            user: reservation.userId,
+            event: reservation.eventId,
+            booking_date: reservation.reservationDate.toISO() ?? "",
+            current_state: state,
+        };
     }
 }

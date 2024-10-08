@@ -1,4 +1,5 @@
 import { Controller, Get, Param } from "@nestjs/common";
+import { EventBackendDto, EventBackendStateEnumDto } from "@repo/data-layer";
 import {
     Event,
     EventGetByIdUseCase,
@@ -13,12 +14,40 @@ export class EventsController {
     ) {}
 
     @Get("active/list")
-    async listActiveEvents(): Promise<Event[]> {
-        return this.eventListAvailableUseCase.execute();
+    async listActiveEvents(): Promise<EventBackendDto[]> {
+        const activeEvents = await this.eventListAvailableUseCase.execute();
+
+        return activeEvents.map(this.toDto);
     }
 
     @Get(":id")
-    async getById(@Param("id") id: string): Promise<Event> {
-        return this.eventGetByIdUseCase.execute(id);
+    async getById(@Param("id") id: string): Promise<EventBackendDto> {
+        const event = await this.eventGetByIdUseCase.execute(id);
+
+        return this.toDto(event);
+    }
+
+    private toDto(event: Event): EventBackendDto {
+        let state: EventBackendStateEnumDto;
+        if (event.state === "active") {
+            state = EventBackendStateEnumDto.Active;
+        } else if (event.state === "cancelled") {
+            state = EventBackendStateEnumDto.Canceled;
+        } else {
+            state = EventBackendStateEnumDto.Finished;
+        }
+
+        return {
+            uuid: event.id,
+            name: event.name,
+            short_description: event.description,
+            date: event.date.toISO() ?? "",
+            city: event.location,
+            capacity: {
+                total: event.totalCapacity,
+                available: event.availableCapacity,
+            },
+            current_state: state,
+        };
     }
 }

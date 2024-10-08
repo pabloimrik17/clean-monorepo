@@ -5,6 +5,11 @@ export interface UserFrontendDto {
     hashed_password: string;
 }
 
+export type UserCreateFrontendDto = Pick<
+    UserFrontendDto,
+    "name" | "email" | "hashed_password"
+>;
+
 export interface UserFrontendGetQueryParamsDto {
     email: string;
 }
