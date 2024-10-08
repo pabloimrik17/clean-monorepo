@@ -1,6 +1,5 @@
 {
   "name": "@repo/domain-layer",
-  "type": "module",
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc"

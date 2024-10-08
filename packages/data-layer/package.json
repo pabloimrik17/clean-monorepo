@@ -1,6 +1,5 @@
 {
   "name": "@repo/data-layer",
-  "type": "module",
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc"
