@@ -1,16 +1,9 @@
 import { Injectable } from "@nestjs/common";
-import { container } from "@repo/di";
 import { EventGetByIdUseCase } from "@repo/domain-layer";
 
 @Injectable()
 export class AppService {
-    private readonly eventGetByIdUseCase: EventGetByIdUseCase;
-
-    constructor() {
-        this.eventGetByIdUseCase = container.get<EventGetByIdUseCase>(
-            "EventGetByIdUseCase",
-        );
-    }
+    constructor(private readonly eventGetByIdUseCase: EventGetByIdUseCase) {}
 
     async getHello(): Promise<string> {
         const event = await this.eventGetByIdUseCase.execute("event-001");
