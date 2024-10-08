@@ -1,10 +1,10 @@
-export interface UserDto {
+export interface UserApiDto {
     uuid: string;
     name: string;
     email: string;
     hashed_password: string;
 }
 
-export interface GetUserQueryParamsDto {
+export interface UserApiGetQueryParamsDto {
     email: string;
 }
