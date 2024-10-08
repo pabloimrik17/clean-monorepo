@@ -1,4 +1,5 @@
 import { Body, Controller, Param, Post, Put } from "@nestjs/common";
+import { ApiResponse } from "@nestjs/swagger";
 import {
     ReservationBackendDto,
     ReservationBackendStateEnumDto,
@@ -28,13 +29,18 @@ export class ReservationsController {
         await this.reservationCancelUseCase.execute(reservationId, userId);
     }
 
+    @ApiResponse({
+        status: 201,
+        description: "The reservation has been successfully created.",
+        type: ReservationBackendDto,
+    })
     @Post()
     async create(
-        @Body() createReservationDto: ReservationCreateBackendDto,
+        @Body() reservationCreateBackendDto: ReservationCreateBackendDto,
     ): Promise<ReservationBackendDto> {
         const reservation = await this.reservationCreateUseCase.execute(
-            createReservationDto.user,
-            createReservationDto.event,
+            reservationCreateBackendDto.user,
+            reservationCreateBackendDto.event,
         );
 
         return this.toDto(reservation);
@@ -43,12 +49,12 @@ export class ReservationsController {
     @Put(":reservationId")
     async edit(
         @Param("reservationId") reservationId: string,
-        @Body() editReservationDto: ReservationUpdateBackendDto,
+        @Body() reservationUpdateBackendDto: ReservationUpdateBackendDto,
     ): Promise<void> {
         await this.reservationEditUseCase.execute(
             reservationId,
-            editReservationDto.user,
-            editReservationDto.event,
+            reservationUpdateBackendDto.user,
+            reservationUpdateBackendDto.event,
         );
     }
 

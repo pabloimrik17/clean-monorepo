@@ -1,18 +1,39 @@
+import { ApiProperty } from "@nestjs/swagger/dist/decorators/api-property.decorator";
+
 export enum ReservationBackendStateEnumDto {
     Canceled = 0,
     Active = 1,
 }
 
-export interface ReservationBackendDto {
-    uuid: string;
-    user: string;
-    event: string;
-    booking_date: string;
-    current_state: ReservationBackendStateEnumDto;
+export class ReservationBackendDto {
+    @ApiProperty()
+    uuid!: string;
+
+    @ApiProperty()
+    user!: string;
+
+    @ApiProperty()
+    event!: string;
+
+    @ApiProperty()
+    booking_date!: string;
+
+    @ApiProperty({ enum: ReservationBackendStateEnumDto })
+    current_state!: ReservationBackendStateEnumDto;
 }
 
-export type ReservationCreateBackendDto = Pick<
-    ReservationBackendDto,
-    "user" | "event"
->;
-export type ReservationUpdateBackendDto = ReservationCreateBackendDto;
+export class ReservationCreateBackendDto {
+    @ApiProperty()
+    user!: string;
+
+    @ApiProperty()
+    event!: string;
+}
+
+export class ReservationUpdateBackendDto {
+    @ApiProperty()
+    user!: string;
+
+    @ApiProperty()
+    event!: string;
+}

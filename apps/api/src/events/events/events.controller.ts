@@ -1,4 +1,5 @@
 import { Controller, Get, Param } from "@nestjs/common";
+import { ApiResponse } from "@nestjs/swagger";
 import { EventBackendDto, EventBackendStateEnumDto } from "@repo/data-layer";
 import {
     Event,
@@ -13,6 +14,11 @@ export class EventsController {
         private readonly eventListAvailableUseCase: EventListAvailableUseCase,
     ) {}
 
+    @ApiResponse({
+        status: 200,
+        description: "List of active events.",
+        type: [EventBackendDto],
+    })
     @Get("active/list")
     async listActiveEvents(): Promise<EventBackendDto[]> {
         const activeEvents = await this.eventListAvailableUseCase.execute();
@@ -20,6 +26,11 @@ export class EventsController {
         return activeEvents.map(this.toDto);
     }
 
+    @ApiResponse({
+        status: 200,
+        description: "The event with the given ID.",
+        type: EventBackendDto,
+    })
     @Get(":id")
     async getById(@Param("id") id: string): Promise<EventBackendDto> {
         const event = await this.eventGetByIdUseCase.execute(id);

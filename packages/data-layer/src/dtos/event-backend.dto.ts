@@ -1,18 +1,34 @@
+import { ApiProperty } from "@nestjs/swagger/dist/decorators/api-property.decorator";
+
 export enum EventBackendStateEnumDto {
     Active = 0,
     Canceled = -1,
     Finished = 1,
 }
 
-export interface EventBackendDto {
-    uuid: string;
-    name: string;
-    short_description: string;
-    date: string;
-    city: string;
-    capacity: {
+export class EventBackendDto {
+    @ApiProperty()
+    uuid!: string;
+
+    @ApiProperty()
+    name!: string;
+
+    @ApiProperty()
+    short_description!: string;
+
+    @ApiProperty()
+    date!: string;
+
+    @ApiProperty()
+    city!: string;
+
+    @ApiProperty()
+    capacity!: {
         total: number;
+
         available: number;
     };
-    current_state: EventBackendStateEnumDto;
+
+    @ApiProperty()
+    current_state!: EventBackendStateEnumDto;
 }
