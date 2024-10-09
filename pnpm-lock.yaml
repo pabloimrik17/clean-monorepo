@@ -68,6 +68,9 @@ importers:
       rxjs:
         specifier: ^7.8.1
         version: 7.8.1
+      uuid:
+        specifier: ^10.0.0
+        version: 10.0.0
       zod:
         specifier: ^3.23.8
         version: 3.23.8
@@ -96,6 +99,9 @@ importers:
       '@types/supertest':
         specifier: ^6.0.0
         version: 6.0.2
+      '@types/uuid':
+        specifier: ^10.0.0
+        version: 10.0.0
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.0.0
         version: 8.8.1(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint@8.57.1)(typescript@5.6.2)
@@ -183,7 +189,7 @@ importers:
         version: 10.0.0
       typescript:
         specifier: latest
-        version: 5.6.2
+        version: 5.6.3
 
   apps/web:
     dependencies:
@@ -260,7 +266,7 @@ importers:
         version: 3.4.2
       typescript:
         specifier: latest
-        version: 5.6.2
+        version: 5.6.3
 
   packages/di:
     dependencies:
@@ -282,7 +288,7 @@ importers:
         version: link:../typescript-config
       typescript:
         specifier: latest
-        version: 5.6.2
+        version: 5.6.3
 
   packages/domain-layer:
     dependencies:
@@ -310,7 +316,7 @@ importers:
         version: 10.0.0
       typescript:
         specifier: latest
-        version: 5.6.2
+        version: 5.6.3
 
   packages/eslint-config:
     devDependencies:
@@ -4908,6 +4914,11 @@ packages:
 
   typescript@5.6.2:
     resolution: {integrity: sha512-NW8ByodCSNCwZeghjN3o+JX5OFH0Ojg6sadjEKY4huZ52TqbJTJnDo5+Tw98lSy63NZvi4n+ez5m2u5d4PkZyw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
+  typescript@5.6.3:
+    resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -10438,6 +10449,8 @@ snapshots:
   typescript@5.3.3: {}
 
   typescript@5.6.2: {}
+
+  typescript@5.6.3: {}
 
   uglify-js@3.19.3:
     optional: true

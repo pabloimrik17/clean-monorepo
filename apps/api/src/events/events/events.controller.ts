@@ -1,11 +1,14 @@
 import { Controller, Get, Param } from "@nestjs/common";
 import { ApiResponse } from "@nestjs/swagger";
-import { EventBackendDto, EventBackendStateEnumDto } from "@repo/data-layer";
 import {
     Event,
     EventGetByIdUseCase,
     EventListAvailableUseCase,
 } from "@repo/domain-layer";
+import {
+    EventBackendDto,
+    EventBackendStateEnumDto,
+} from "../../users/data/dtos/event-backend.dto";
 
 @Controller("events")
 export class EventsController {

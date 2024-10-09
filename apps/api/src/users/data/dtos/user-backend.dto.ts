@@ -1,6 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger/dist/decorators/api-property.decorator";
+import { databaseSchema } from "../../../database/database-schema";
 
-export class UserBackendDto {
+export class UserResponseDto {
     @ApiProperty()
     uuid!: string;
 
@@ -14,7 +15,7 @@ export class UserBackendDto {
     hashed_password!: string;
 }
 
-export class UserCreateBackendDto {
+export class UserCreateInputDto {
     @ApiProperty()
     name!: string;
 
@@ -28,3 +29,6 @@ export class UserCreateBackendDto {
 export interface UserBackendGetQueryParamsDto {
     email: string;
 }
+
+export type UserGetDto = typeof databaseSchema.users.$inferSelect;
+export type UserSaveDto = typeof databaseSchema.users.$inferInsert;
