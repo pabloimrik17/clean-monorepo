@@ -1,11 +1,21 @@
-import { Controller, Get, Param } from "@nestjs/common";
+import {
+    Controller,
+    Get,
+    HttpException,
+    HttpStatus,
+    Param,
+} from "@nestjs/common";
 import { ApiResponse } from "@nestjs/swagger";
-import { EventBackendDto, EventBackendStateEnumDto } from "@repo/data-layer";
 import {
     Event,
     EventGetByIdUseCase,
     EventListAvailableUseCase,
+    NotFoundException,
 } from "@repo/domain-layer";
+import {
+    EventBackendDto,
+    EventBackendStateEnumDto,
+} from "../../users/data/dtos/event-backend.dto";
 
 @Controller("events")
 export class EventsController {
@@ -33,9 +43,37 @@ export class EventsController {
     })
     @Get(":id")
     async getById(@Param("id") id: string): Promise<EventBackendDto> {
-        const event = await this.eventGetByIdUseCase.execute(id);
+        const eventResult = await this.eventGetByIdUseCase.execute(id);
 
-        return this.toDto(event);
+        if (eventResult.isLeft()) {
+            const error = eventResult.getLeftOrThrow();
+
+            if (error instanceof NotFoundException) {
+                throw new HttpException(
+                    {
+                        status: HttpStatus.NOT_FOUND,
+                        error: error.message,
+                    },
+                    HttpStatus.NOT_FOUND,
+                    {
+                        cause: error,
+                    },
+                );
+            } else {
+                throw new HttpException(
+                    {
+                        status: HttpStatus.BAD_REQUEST,
+                        error: error.message,
+                    },
+                    HttpStatus.BAD_REQUEST,
+                    {
+                        cause: error,
+                    },
+                );
+            }
+        }
+
+        return this.toDto(eventResult.getOrThrow());
     }
 
     private toDto(event: Event): EventBackendDto {

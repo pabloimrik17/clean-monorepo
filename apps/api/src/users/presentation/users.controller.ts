@@ -1,17 +1,19 @@
 import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { ApiResponse } from "@nestjs/swagger";
 import {
-    ReservationBackendDto,
-    ReservationBackendStateEnumDto,
-    UserBackendDto,
-    UserCreateBackendDto,
-} from "@repo/data-layer";
-import {
     Reservation,
     User,
-    UserCreateUseCase,
     UserGetReservationsUseCase,
 } from "@repo/domain-layer";
+import {
+    ReservationBackendDto,
+    ReservationBackendStateEnumDto,
+} from "../data/dtos/reservation-backend.dto";
+import {
+    UserCreateInputDto,
+    UserResponseDto,
+} from "../data/dtos/user-backend.dto";
+import { UserCreateUseCase } from "../domain/usecases/user-create.usecase";
 
 @Controller("users")
 export class UsersController {
@@ -23,12 +25,12 @@ export class UsersController {
     @ApiResponse({
         status: 201,
         description: "The user has been successfully created.",
-        type: UserBackendDto,
+        type: UserResponseDto,
     })
     @Post()
     async create(
-        @Body() userCreateBackendDto: UserCreateBackendDto,
-    ): Promise<UserBackendDto> {
+        @Body() userCreateBackendDto: UserCreateInputDto,
+    ): Promise<UserResponseDto> {
         const createdUser = await this.userCreateUseCase.execute(
             userCreateBackendDto.name,
             userCreateBackendDto.email,
@@ -47,7 +49,7 @@ export class UsersController {
         return reservations.map(this.toReservationDto);
     }
 
-    private toDto(user: User): UserBackendDto {
+    private toDto(user: User): UserResponseDto {
         return {
             uuid: user.id,
             name: user.name,

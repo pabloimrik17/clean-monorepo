@@ -1,17 +1,17 @@
 import { Body, Controller, Param, Post, Put } from "@nestjs/common";
 import { ApiResponse } from "@nestjs/swagger";
 import {
-    ReservationBackendDto,
-    ReservationBackendStateEnumDto,
-    ReservationCreateBackendDto,
-    ReservationUpdateBackendDto,
-} from "@repo/data-layer";
-import {
     Reservation,
     ReservationCancelUseCase,
     ReservationCreateUseCase,
     ReservationEditUseCase,
 } from "@repo/domain-layer";
+import {
+    ReservationBackendDto,
+    ReservationBackendStateEnumDto,
+    ReservationCreateBackendDto,
+    ReservationUpdateBackendDto,
+} from "../../users/data/dtos/reservation-backend.dto";
 
 @Controller("reservations")
 export class ReservationsController {

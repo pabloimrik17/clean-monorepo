@@ -6,11 +6,8 @@ export * from "./repositories/reservation.frontend-repository";
 export * from "./repositories/user.frontend-repository";
 
 // Dtos
-export * from "./dtos/event-backend.dto";
 export * from "./dtos/event-frontend.dto";
-export * from "./dtos/reservation-backend.dto";
 export * from "./dtos/reservation-frontend.dto";
-export * from "./dtos/user-backend.dto";
 export * from "./dtos/user-frontend.dto";
 
 // Datasources

@@ -15,9 +15,11 @@ export class EventFrontendRepository implements EventRepository {
     getById(id: string): Promise<null | Event> {
         return this.eventDatasource.getById(id);
     }
+
     listActiveEvents(): Promise<Event[]> {
         return this.eventDatasource.listActiveEvents();
     }
+
     update(event: Event): Promise<void> {
         return this.eventDatasource.update(event);
     }

@@ -152,7 +152,14 @@ const getEventById = async () => {
         const eventGetByIdUseCase = frontendContainer.get<EventGetByIdUseCase>(
             "EventGetByIdUseCase",
         );
-        const event = await eventGetByIdUseCase.execute(eventId);
+        const eventResult = await eventGetByIdUseCase.execute(eventId);
+        if (eventResult.isLeft()) {
+            const error = eventResult.getLeftOrThrow();
+            console.log(chalk.red(`Error: ${error.message}`));
+            return;
+        }
+
+        const event = eventResult.getOrThrow();
         console.log(
             chalk.green(
                 `Evento encontrado: ${event.name}, ${event.description}`,

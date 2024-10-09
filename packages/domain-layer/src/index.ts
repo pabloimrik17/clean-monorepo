@@ -14,6 +14,9 @@ export * from "./usecases/reservation-edit.usecase.js";
 export * from "./usecases/user-create.usecase.js";
 export * from "./usecases/user-get-reservations.usecase.js";
 
+// Errors
+export * from "./errors/not-found.exception.js";
+
 // Repositories
 export * from "./repositories/event.repository.js";
 export * from "./repositories/reservation.repository.js";
