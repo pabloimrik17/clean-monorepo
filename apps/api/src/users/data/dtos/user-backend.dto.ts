@@ -26,9 +26,5 @@ export class UserCreateInputDto {
     hashed_password!: string;
 }
 
-export interface UserBackendGetQueryParamsDto {
-    email: string;
-}
-
 export type UserGetDto = typeof databaseSchema.users.$inferSelect;
 export type UserSaveDto = typeof databaseSchema.users.$inferInsert;
